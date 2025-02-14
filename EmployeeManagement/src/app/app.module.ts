@@ -9,6 +9,7 @@ import { EmployeeComponent } from './Pages/employee/employee.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { ProjectComponent } from './Pages/project/project.component';
 import { ProjectEmployeesComponent } from './Pages/project-employees/project-employees.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,11 +19,14 @@ import { ProjectEmployeesComponent } from './Pages/project-employees/project-emp
     EmployeeComponent,
     DashboardComponent,
     ProjectComponent,
-    ProjectEmployeesComponent
+    ProjectEmployeesComponent,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
