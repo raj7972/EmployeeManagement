@@ -10,6 +10,7 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { ProjectComponent } from './Pages/project/project.component';
 import { ProjectEmployeesComponent } from './Pages/project-employees/project-employees.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

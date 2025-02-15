@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {EmployeeManagementService } from 'src/app/employee.service';
+import { LoginRequest } from 'src/app/login-dto';
 
 @Component({
   selector: 'app-login',
@@ -10,29 +12,36 @@ export class LoginComponent {
   loginForm: FormGroup;
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _employeservice : EmployeeManagementService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  // Toggle Password Visibility
-  togglePassword(): void {
-    this.showPassword = !this.showPassword;
-  }
+  username: string = '';
+  password: string = '';
 
-  // Handle Form Submission
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      console.log('Login Successful:', this.loginForm.value);
-      alert('Login Successful!');
-    } else {
-      this.loginForm.markAllAsTouched(); // Show all validation errors
+  onLogin(): void {
+    if (this.loginForm.invalid) {
+      console.log("not working");
+      
+      return;
     }
-  }
 
-  forgotPassword(): void {
-    alert('Redirecting to Forgot Password Page...');
+
+    const loginData: LoginRequest = this.loginForm.value;
+
+    this._employeservice.login(loginData).subscribe({
+      next: (response) => {
+        console.log('Login Successful!', response);
+        alert('Login Successful!');
+        localStorage.setItem('token', response.token); // Store token for authentication
+      },
+      error: (err: any) => {
+        console.error('Login Failed:', err);
+     
+      },
+    });
   }
 }

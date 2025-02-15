@@ -10,26 +10,37 @@
 <body>
     <main class="main-login">
         <div class="left-login">
-            <h1>Login<br>And join our team</h1>
-            <img src="https://i.postimg.cc/YC13sX2Z/Astronaut-cuate.png" class="left-login-img" alt="astronaut image">
+          <h1>Login<br>And join our team</h1>
+          <img src="https://i.postimg.cc/YC13sX2Z/Astronaut-cuate.png" class="left-login-img" alt="astronaut image">
         </div>
-
+      
         <div class="right-login">
-            <div class="card-login">
-                <h1>Login</h1>
-                <div class="textfield">
-                    <label for="user">User</label>
-                    <input type="text" name="user" placeholder="User">
-                </div>
-
-                <div class="textfield">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" placeholder="Password">
-                </div>
-
-                <button class="btn-login">Login</button>
-            </div>
+          <div class="card-login">
+            <h1>Login</h1>
+      
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+              <div class="textfield">
+                <label for="userName">User</label>
+                <input type="text" id="userName" formControlName="username" placeholder="Enter your email">
+                <small class="error" *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched">
+                  Username is required and must be a valid email.
+                </small>
+              </div>
+      
+              <div class="textfield">
+                <label for="password">Password</label>
+                <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+                <small class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                  Password must be at least 6 characters.
+                </small>
+              </div>
+      
+              <button type="submit" class="btn-login" [disabled]="loginForm.invalid">Login</button>
+            </form>
+          </div>
         </div>
-    </main>
+      </main>
+      
+    
 </body>
 </html>
